@@ -1,6 +1,6 @@
 #+TITLE: Digital Design & Retrocomputing
 #+AUTHOR: Travis Ayres
-#+SETUPFILE: ../submodules/org-html-themes/org/theme-readtheorg-local.setup
+#+SETUPFILE: ./theme-readtheorg-local.setup
 
 * Introduction
 Nonlinear approach to retrocomputing.
