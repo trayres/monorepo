@@ -1,0 +1,19 @@
+#+TITLE: Digital Design & Retrocomputing
+#+AUTHOR: Travis Ayres
+#+SETUPFILE: ./theme-readtheorg-local.setup
+
+* Introduction
+Nonlinear approach to retrocomputing.
+Because linearity is boring anyway.
+Collected thoughts. Not much by themselves.
+Trying the monorepo approach.
+Not all is lost.
+
+** A section
+With some words
+*** a subsection of that section
+With some other words
+** A new section
+
+* A new chapter
+with some other things
