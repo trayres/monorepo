@@ -1,0 +1,41 @@
+--- HDMI_test.v	2013-09-10 08:59:18.000000000 -0700
++++ HDMI_test_TRA.v	2022-11-16 17:14:35.384171900 -0800
+@@ -2,11 +2,27 @@
+ 
+ ////////////////////////////////////////////////////////////////////////
+ module HDMI_test(
+-	input pixclk,  // 25MHz
++	input SYSCLK,  // 100M input clk
+ 	output [2:0] TMDSp, TMDSn,
+ 	output TMDSp_clock, TMDSn_clock
+ );
+ 
++wire clk_250M;
++wire clk_25M;
++wire pixclk;
++assign pixclk = clk_25M;
++
++  clk_wiz_0 clkgen
++   (
++    // Clock out ports
++    .CLK_250M(clk_250M),     // output CLK_250M
++    .CLK_25M(clk_25M),     // output CLK_25M
++    // Status and control signals
++    .reset(1'b0), // input reset
++    .locked(),       // output locked
++   // Clock in ports
++    .clk_in1(SYSCLK));      // input clk_in1
++
+ ////////////////////////////////////////////////////////////////////////
+ reg [9:0] CounterX, CounterY;
+ reg hSync, vSync, DrawArea;
+@@ -34,7 +50,8 @@
+ 
+ ////////////////////////////////////////////////////////////////////////
+ wire clk_TMDS, DCM_TMDS_CLKFX;  // 25MHz x 10 = 250MHz
+-DCM_SP #(.CLKFX_MULTIPLY(10)) DCM_TMDS_inst(.CLKIN(pixclk), .CLKFX(DCM_TMDS_CLKFX), .RST(1'b0));
++//DCM_SP #(.CLKFX_MULTIPLY(10)) DCM_TMDS_inst(.CLKIN(pixclk), .CLKFX(DCM_TMDS_CLKFX), .RST(1'b0));
++assign DCM_TMDS_CLKFX = clk_250M;
+ BUFG BUFG_TMDSp(.I(DCM_TMDS_CLKFX), .O(clk_TMDS));
+ 
+ ////////////////////////////////////////////////////////////////////////

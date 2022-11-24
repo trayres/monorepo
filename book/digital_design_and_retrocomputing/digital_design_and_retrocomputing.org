@@ -3,17 +3,14 @@
 #+SETUPFILE: ./theme-readtheorg-local.setup
 
 * Introduction
-Nonlinear approach to retrocomputing.
-Because linearity is boring anyway.
-Collected thoughts. Not much by themselves.
-Trying the monorepo approach.
-Not all is lost.
+The intent of this book is to document things that may (or may not) be useful for others who are interested in digital design and retrocomputing.
 
-** A section
-With some words
-*** a subsection of that section
-With some other words
-** A new section
 
-* A new chapter
-with some other things
+* HDMI Output
+There seem to be a lot of people in retrocomputing circles that use VGA output. This is understandable from a didactic standpoint - it is extremely simple, and can in fact be created with a simple R-2R DAC. 
+
+** FPGA4Fun
+This website has a great introduction to HDMI, including source code; I modified it slightly to fit one of my FPGA boards and fired it up.
+
+
+* VGA Output
