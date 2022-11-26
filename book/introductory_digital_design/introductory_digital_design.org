@@ -1,0 +1,15 @@
+#+TITLE: Introductory Digital Design
+#+AUTHOR: Travis Ayres
+#+SETUPFILE: ./theme-readtheorg-local.setup
+
+
+* Introduction
+The stated goal of this document is to introduce the concepts and practice of digital design; in truth it is to further my own understanding. Hopefully it is useful to someone else.
+
+* A Brief and Minimal Exercise
+So you have decided to learn digital design; after purchasing your development board, you want to see "something", but you're not quite sure what? You've come to the right place.
+
+** So... what now?
+We're going to connect a handful of buttons, a logic gate, and an LED. Is it the world's most impressive thing? No, but this is "baseline sanity".
+
+** Baseline sanity?
