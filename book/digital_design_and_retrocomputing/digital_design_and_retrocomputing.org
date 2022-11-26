@@ -13,4 +13,5 @@ There seem to be a lot of people in retrocomputing circles that use VGA output. 
 This website has a great introduction to HDMI, including source code; I modified it slightly to fit one of my FPGA boards and fired it up.
 
 
+
 * VGA Output
