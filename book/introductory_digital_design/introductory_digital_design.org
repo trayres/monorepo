@@ -1,11 +1,57 @@
-#+TITLE: Introductory Digital Design
+#+TITLE: (Example) Introductory Digital Design
 #+AUTHOR: Travis Ayres
 #+SETUPFILE: ./theme-readtheorg-local.setup
 
 
 * Introduction
-The stated goal of this document is to introduce the concepts and practice of digital design; in truth it is to further my own understanding. Hopefully it is useful to someone else.
+This document is a brief showcase of using Emacs & Org-mode to export longer form documents and leverage them in web projects going forward. It introduces digital design through a minimal example targeted to a [[https://digilent.com/shop/nexys-video-artix-7-fpga-trainer-board-for-multimedia-applications/][Nexys Video FPGA board]].
 
+* A 'Hello, World!' for Digial Design
+We're going to create an absolutely minimal project; a "Hello, World!" for digital design.
+** Vivado Project Steps
+*** Open Vivado and Create a Project
+I'm using Vivado 2021.2; most recent versions of Vivado look similar. Open Vivado and click on "Create Project".
+
+[[./vivado_click_create_project.png]]
+
+*** New Project Wizard
+On the New Project Wizard page, click Next.
+[[./vivado_create_a_new_vivado_project.png]]
+
+*** Project Name and Location
+Choose a project name and a location. Note that you can have Vivado create the project directory for you with the "Create project subdirectory" checkbox.
+[[./vivado_create_project_name.png]]
+
+*** Project Type
+Set the project type as in the below image; this will give you a basic project. We will add our "Hello, World!" code soon after!
+Click "Next".
+[[./vivado_project_type.png]]
+
+*** Select Part
+Next we'll have to tell Vivado what part we intend to use.
+
+In the search box, type: xc7a200tsbg484, and select the speed grade 1 part as indicated. 
+
+Note that FPGAs vary in packages, speed, logic capacity, and their part numbers can be confusing. We are skipping a tremendous amount of detail in the interests of expediency.
+
+As an exercise, you should look at the [[https://digilent.com/shop/nexys-video-artix-7-fpga-trainer-board-for-multimedia-applications/][Digilent reference page for the Nexys Video]]. You can also look at the [[https://digilent.com/reference/_media/reference/programmable-logic/nexys-video/nexys_video_sch.pdf][schematic for the board]].
+You *will* become comfortable with both the reference documentation and the schematics of the boards you use!
+For now, click "Next".
+[[./vivado_select_part.png]]
+
+*** Project Summary
+Vivado will now show you a project summary, to confirm the choices you've made thus far. If you've made all the same choices as indicated in this tutorial, it should look like this:
+[[./vivado_project_summary.png]]
+
+*** 
+
+** Significance of "Hello, World!"
+This seems very brief; even laughable. What does this really do? 
+
+* References
+1) [[https://en.wikipedia.org/wiki/Logic_gate][Wikipedia: Logic Gate]]
+2) [[https://en.wikipedia.org/wiki/Field-programmable_gate_array][Field-programmable gate array]]
+   
 * A Brief and Minimal Exercise
 So you have decided to learn digital design; after purchasing your development board, you want to see "something", but you're not quite sure what? You've come to the right place.
 
