@@ -11,6 +11,8 @@ get_sytse_pdp11:
 copy_readtheorg_files_to_book_dirs:
 	cp -R submodules/org-html-themes/src                              book/digital_design_and_retrocomputing/src
 	cp    submodules/org-html-themes/org/theme-readtheorg-local.setup book/digital_design_and_retrocomputing
+	cp -R submodules/org-html-themes/src                              book/introductory_digital_design/src
+	cp    submodules/org-html-themes/org/theme-readtheorg-local.setup book/introductory_digital_design
 	
 all: init_submodules copy_readtheorg_files_to_book_dirs
 
