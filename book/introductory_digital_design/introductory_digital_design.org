@@ -4,30 +4,25 @@
 
 
 * Introduction
-This document is a brief showcase of using Emacs & Org-mode to export longer form documents and leverage them in web projects going forward. It introduces digital design through a minimal example targeted to a [[https://digilent.com/shop/nexys-video-artix-7-fpga-trainer-board-for-multimedia-applications/][Nexys Video FPGA board]].
+This document is a brief showcase of using Emacs & Org-mode to export longer form documents and leverage them in web projects going forward. It introduces digital design through a minimal example targeted to a [[https://digilent.com/shop/nexys-video-artix-7-fpga-trainer-board-for-multimedia-applications/][Nexys Video FPGA board]]. It utilizes fniessen's [[https://github.com/fniessen/org-html-themes][org-html-themes Github repo]].
 
 * A 'Hello, World!' for Digial Design
 We're going to create an absolutely minimal project; a "Hello, World!" for digital design.
 ** Vivado Project Steps
-*** Open Vivado and Create a Project
-I'm using Vivado 2021.2; most recent versions of Vivado look similar. Open Vivado and click on "Create Project".
+Open Vivado and Create a Project. I'm using Vivado 2021.2; most recent versions of Vivado look similar. Open Vivado and click on "Create Project".
 
 [[./vivado_click_create_project.png]]
 
-*** New Project Wizard
 On the New Project Wizard page, click Next.
 [[./vivado_create_a_new_vivado_project.png]]
 
-*** Project Name and Location
 Choose a project name and a location. Note that you can have Vivado create the project directory for you with the "Create project subdirectory" checkbox.
 [[./vivado_create_project_name.png]]
 
-*** Project Type
 Set the project type as in the below image; this will give you a basic project. We will add our "Hello, World!" code soon after!
 Click "Next".
 [[./vivado_project_type.png]]
 
-*** Select Part
 Next we'll have to tell Vivado what part we intend to use.
 
 In the search box, type: xc7a200tsbg484, and select the speed grade 1 part as indicated. 
@@ -39,23 +34,118 @@ You *will* become comfortable with both the reference documentation and the sche
 For now, click "Next".
 [[./vivado_select_part.png]]
 
-*** Project Summary
 Vivado will now show you a project summary, to confirm the choices you've made thus far. If you've made all the same choices as indicated in this tutorial, it should look like this:
 [[./vivado_project_summary.png]]
 
-*** 
+From the Vivado main window, click "Add Sources" (see below image).
+[[./vivado_add_sources.png]]
+
+The Add Sources wizard will appear.
+
+Select "Add or create design sources".
+[[./vivado_add_or_create_design_sources.png]]
+
+
+Click "Create File".
+[[./vivado_add_sources_create_file.png]]
+
+In the "Create Source File" window, for "File name" type "and2.v", and press OK.
+This will place your file in a default location within the folder your project is in.
+[[./vivado_create_source_file_and2.png]]
+
+After pressing OK, you will see and2 included in the Add Sources dialog box, as below.
+[[./vivado_add_sources_and2.png]]
+
+Select "Finish".
+
+Vivado will ask if you'd like it to do some extra work defining a module for you.
+Let's ignore it; press "Ok".
+[[./vivado_define_module.png]]
+
+There will be a popup, saying the module definition has not been changes. Press "Yes" to use these values.
+[[./vivado_define_module_default_values.png]]
+
+
+Vivado will now display and2 as a module in your design hiearchy.
+[[./vivado_with_and2.png]]
+
+Double click on "and2" to open an editor on that file.
+It will look as shown below:
+[[./vivado_and2_source_open.png]]
+
+Now, we want to modify the and2 module, like this:
+#+BEGIN_SRC verilog
+    `timescale 1ns / 1ps
+    module and2(
+		input A,
+		input B,
+		output Y
+      );
+
+     assign Y = A & B;
+  endmodule
+#+END_SRC
+
+Lines that begin with // are comments, and do not impact the generated code.
+The first line is a timescale directive; it won't impact our synthesis results. 
+
+Now click on "Add Sources" again, and this time select "Add or create constraint" and click "Next".
+[[./vivado_add_or_create_constraint.png]]
+
+Now click "Create File":
+[[./vivado_add_sources_add_or_create_constraint_click_create_file.png]]
+
+Pick a name for your constraint file; here I've chosen "and2constraints" and click OK:
+[[./vivado_name_constraints.png]]
+
+Now you'll find the constraint file listed in the wizard:
+[[./vivado_add_sources_myconstraints.png]]
+
+Click "Finish":
+[[./vivado_add_sources_myconstraints_finish_highlighted.png]]
+
+Now within Vivado, click on the constraint file that was added (myconstraints.xdc). It will open a text editor, similar to what we did for and2:
+[[./vivado_edit_constraints.png]]
+
+Now click "Generate bitstream":
+[[./vivado_generate_bitstream.png]]
+
+A window will pop up a the end of the bitstream generation process. Click "Ok" after selecting "Open hardware manager".
+
+[[./vivado_bitgen_successful_open_hardware_manager.png]]
+
+Now we'll load our bitstream onto the FPGA via JTAG.
+
+Once the hardware manager is open, click "Open target", and select "Auto connect":
+[[./vivado_open_target_auto_connect.png]]
+
+
+Several windows will pop up as the connection progresses. After it is established, right click on your device and select "Program Device":
+[[./vivado_program_device.png]]
+
+The program device wizard will pop up; it should be populated with the bitstream we generated earlier:
+[[./vivado_and2bit.png]]
+
+Press "Program" - our device will now be programmed with our bitstream.
+
+Congratulations - pressing the right and left D-pad buttons at the same time, should light up LED0:
+[[./nexys_video_and2.png]]
+
 
 ** Significance of "Hello, World!"
-This seems very brief; even laughable. What does this really do? 
+This seems very brief; even laughable - we've made an AND gate with an FPGA, so what? What does this really do, and why is it so often mentioned?
+
+Think of the incredible array of things that had to work for this simple demonstration to be possible.
+You know your EDA tool, computer, cables, development board (there are caveats here - a part that appears to work during basic testing could have more complicated, intermittent failure modes, but that's beyond the scope of discussion here); you turned on millions of transistors in your processor to achieve this simple result - and they all produced the result you were expecting!
+
+"Hello, World!" isn't really a magic incantation - it's an exercise in "basline sanity" which should be checked before we do any serious work. It's amazing how much time you can save yourself with a minimal sanity check before you do work.
+
+For example, you've just pulled down an oscilloscope and are checking a circuit. Did you check that the probes work before you made your measurements? It might sound silly, but it's the same concept.
+
+This gets into "scientific debugging" - having a theory about why things went wrong which is testable... but I'll save that for later. 
 
 * References
 1) [[https://en.wikipedia.org/wiki/Logic_gate][Wikipedia: Logic Gate]]
 2) [[https://en.wikipedia.org/wiki/Field-programmable_gate_array][Field-programmable gate array]]
+3) [[https://github.com/Digilent/digilent-xdc/blob/master/Nexys-Video-Master.xdc][Nexys Video Master Constraint File (Github)]]
    
-* A Brief and Minimal Exercise
-So you have decided to learn digital design; after purchasing your development board, you want to see "something", but you're not quite sure what? You've come to the right place.
-
-** So... what now?
-We're going to connect a handful of buttons, a logic gate, and an LED. Is it the world's most impressive thing? No, but this is "baseline sanity".
-
-** Baseline sanity?
