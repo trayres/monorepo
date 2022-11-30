@@ -1,3 +1,6 @@
 [submodule "submodules/org-html-themes"]
 	path = submodules/org-html-themes
 	url = git@github.com:fniessen/org-html-themes.git
+[submodule "submodules/fusesoc"]
+	path = submodules/fusesoc
+	url = git@github.com:trayres/fusesoc.git
